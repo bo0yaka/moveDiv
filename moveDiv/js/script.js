@@ -5,8 +5,9 @@ function pressToMove() {
 		counter++;
 		document.getElementById("movingDiv").style.marginLeft = counter + 'px'
 		changeColor(counter);
-		if (counter == 500)
-			clearInterval(id)
+		if (counter == 500) {
+			clearInterval(id) 
+		}
 	}
 
 	var id = setInterval(move, 10);
