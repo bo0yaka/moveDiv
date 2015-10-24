@@ -1,0 +1,6 @@
+#movingDiv {
+	width: 100px;
+	height: 100px;
+	border: 1px solid black;
+	transition: border 1s linear; 
+}
