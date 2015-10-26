@@ -10,14 +10,14 @@ getDiv.addEventListener("click", pressToMoveRight);
 
 function pressToMoveRight() {
 	var getDiv = document.getElementById("movingDiv");
+	getDiv.removeEventListener("click", pressToMoveRight);
 	var counter = 0
 	function move() {
 		counter++;
 		getDiv.style.marginLeft = counter + 'px'
-		//changeColor(counter);
-		if (counter == 100) {
+	changeColorWhileRightDown(counter);
+		if (counter == 500) {
 			clearInterval(id); 
-			getDiv.removeEventListener("click", pressToMoveRight);
 			getDiv.addEventListener("click", pressToMoveDown);
 		}
 	}
@@ -28,14 +28,14 @@ function pressToMoveRight() {
 
 function pressToMoveDown() {
 	var getDiv = document.getElementById("movingDiv");
+	getDiv.removeEventListener("click", pressToMoveDown);
 	var counter = 0;
 	function move() {
 		counter++;
 		getDiv.style.marginTop = counter + 'px'
-	//	changeColor(counter);
-		if (counter == 100) {
+	changeColorWhileRightDown(counter);
+		if (counter == 500) {
 			clearInterval(id);
-			getDiv.removeEventListener("click", pressToMoveDown);
 			getDiv.addEventListener("click", pressToMoveLeft); 
 		}
 	}
@@ -46,15 +46,15 @@ function pressToMoveDown() {
 
 function pressToMoveLeft() {
 	var getDiv = document.getElementById("movingDiv");
+	getDiv.removeEventListener("click", pressToMoveLeft);
 	var counter = getDiv.style.marginLeft;
 	var newCounter = counter.substr(0,3)
 	function move() {
 		newCounter--;
 		getDiv.style.marginLeft = newCounter + 'px'
-	//	changeColor(counter);
+	changeColorWhileLeftUp(newCounter);
 		if (newCounter == 0) {
 			clearInterval(id);
-			getDiv.removeEventListener("click", pressToMoveLeft);
 			getDiv.addEventListener("click", pressToMoveUp); 
 		}
 	}
@@ -65,15 +65,15 @@ function pressToMoveLeft() {
 
 function pressToMoveUp() {
 	var getDiv = document.getElementById("movingDiv");
+	getDiv.removeEventListener("click", pressToMoveUp);
 	var counter = getDiv.style.marginTop;
 	var newCounter = counter.substr(0,3);
 	function move() {
 		newCounter--;
 		getDiv.style.marginTop = newCounter + 'px'
-	//	changeColor(counter);
+	changeColorWhileLeftUp(newCounter);
 		if (newCounter == 0) {
 			clearInterval(id);
-			getDiv.removeEventListener("click", pressToMoveUp);
 			getDiv.addEventListener("click", pressToMoveRight); 
 		}
 	}
@@ -82,12 +82,22 @@ function pressToMoveUp() {
 
 }
 
-function changeColor(position) {
+function changeColorWhileRightDown(position) {
 	var getDiv = document.getElementById("movingDiv");
 	if (position <= 100)
-		getDiv.style.borderColor = "red";
+		getDiv.style.backgroundColor = "red";
 	else if (position > 100 && position <= 300)
-		getDiv.style.borderColor = "blue";
+		getDiv.style.backgroundColor = "blue";
 	else
-		getDiv.style.borderColor = "green";
+		getDiv.style.backgroundColor = "green";
+}
+
+function changeColorWhileLeftUp(position) {
+	var getDiv = document.getElementById("movingDiv");
+	if (position >= 300)
+		getDiv.style.backgroundColor = "red";
+	else if (position < 300 && position >= 100)
+		getDiv.style.backgroundColor = "blue";
+	else
+		getDiv.style.backgroundColor = "green";
 }
